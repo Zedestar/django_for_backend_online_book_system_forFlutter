@@ -20,7 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('core/', include('core.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('', include('dj_rest_auth.urls')),
     path('registration/', include('dj_rest_auth.registration.urls')),    # This is the first line that wants user to be registered
     path('account/', include('allauth.urls'))
 ]
@@ -42,8 +42,5 @@ urlpatterns = [
 # there fore after successful verification, it take us to the path tha is accounts/login whihch are fround from dj_rest_auth.urls, here contains list fo paths like
 # password/reset
 # password/reset/confirm
-# login/
-# logout/
-# user/
 
-# there fore we have to create the accounts. with the urls dj_rest_auth.urls
+# there fore we have to create the accounts.login path, that directs us to the app accounts

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
-    'accounts.apps.AccountsConfig',
+    'accounts.app.AccountsConfig',
     
     # This are third party packages
     'django.contrib.sites',
