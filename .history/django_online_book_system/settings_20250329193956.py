@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from  decouple import config
+# from  decouple import config
 from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "django-insecure-d$^2gq((t5ygxz531wd7#pglr#2(u14qd_bkk&gkpcv*fkce!("
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.1.4"]
 
 
 # Application definition
@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'django_online_book_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / config('DATABSE_NAME'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -170,5 +170,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = "mmagota2@gmail.com"
+EMAIL_HOST_PASSWORD = "mxzq rnmh ivbg zjji"
+#django_online_book_system
+#django_online_book_system
+#django_online_book_system

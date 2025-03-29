@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+# from  decouple import config
+from django.conf import settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d$^2gq((t5ygxz531wd7#pglr#2(u14qd_bkk&gkpcv*fkce!('
+SECRET_KEY = "django-insecure-d$^2gq((t5ygxz531wd7#pglr#2(u14qd_bkk&gkpcv*fkce!("
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "192.168.1.4"]
 
 
 # Application definition
@@ -37,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'core.apps.CoreConfig',
+    'accounts.apps.AccountsConfig',
+    'books.apps.BooksConfig',
     
+    # This are third party packages
     'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
@@ -51,6 +57,10 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'core.User'
 SITE_ID = 1
+REST_USE_JWT = True  # If using JWT
+settings.ACCOUNT_LOGIN_METHODS = {'email'} # If logging in with email
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False  
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +70,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    
+    # This is added
+    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'django_online_book_system.urls'
@@ -89,7 +104,7 @@ WSGI_APPLICATION = 'django_online_book_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / config('DATABSE_NAME'),
     }
 }
 
@@ -111,6 +126,18 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',  # Ensure this is set
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+
+REST_FRAMEWORK = {
+    'DEFAUULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
 
 
 # Internationalization
@@ -134,3 +161,17 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+#django_online_book_system
+#django_online_book_system
+#django_online_book_system
